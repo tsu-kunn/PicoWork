@@ -5,9 +5,6 @@ Raspberry Pi Picoの勉強で使用したソースファイルやデータファ
 - [Raspberry Pi Pico 2Wのメモ](https://github.com/tsu-kunn/Config/blob/master/md/RPPico2W.md)
 
 ## ソースコード
-### led_run.py
-Lチカするだけのコード。
-
 ### led_wifi_run.py
 Wi-Fiに接続したあとにLチカするコード。
 
