@@ -159,23 +159,49 @@ if __name__=='__main__':
 
     showQR = False
     
+    px = 0
+    py = 32
+    moveRet = False
+    moveTime = time.ticks_ms();
+    
     while (1):
         if keyA.value() == 0:
             showQR = 1
+            moveTime = time.ticks_ms();
             print("A")
 
-        if (keyB.value() == 0):
+        if keyB.value() == 0:
             showQR ^= 1
             print("B")
-
+            
         OLED.fill(0x0000)
 
         if showQR:
+            if time.ticks_ms() - moveTime > 1000:
+                moveTime = time.ticks_ms()
+                
+                if moveRet:
+                    px -= 8
+                else:
+                    px += 8
+
+                if px < 0:
+                    moveRet = False
+                    px = 0
+                    py += 8
+                if px > 40:
+                    moveRet = True
+                    px = 40
+                    py += 8
+                
+                if py > 56:
+                    py = 32
+
             OLED.text("Go to", 0, 10, OLED.white)
             OLED.text("HomePage", 0, 20, OLED.white)
-            OLED.blit(apple, 0, 56)
-            OLED.blit(onigiri, 8, 56)
-            OLED.blit(pine, 16, 56)
+            OLED.blit(apple, px + 0, py)
+            OLED.blit(onigiri, px + 8, py)
+            OLED.blit(pine, px + 16, py)
             OLED.blit(bmp, 64, 0)
         else:
             OLED.text("X@tsu_kunn", 1, 10, OLED.white)
